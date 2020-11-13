@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '4c4fc04fd20ffa23baca8bfe9e32f13c9b22bb676130357ccba4e226b9873fd12bcd2757757fb378ba5b3d923c8df766c65c51cdc40565965bfdcffba50687c3'
+  config.secret_key = ENV['SECRET_KEY']
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -308,4 +308,19 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+  config.jwt do |jwt|
+    jwt.secret = ENV['SECRET_KEY']
+    warn('warning: jwt.secret can not be nil') if jwt.secret.nil?
+    #  You need to tell which requests will dispatch tokens for the user that has been previously
+    #  authenticated (usually through some other warden strategy, such as one requiring username and email parameters).
+    #  To configure it, you can add the the request path to dispath_requests
+    jwt.dispatch_requests = [['POST', %r{^users/sign_in$}]]
+
+    #  You need to tell which requests will revoke incoming JWT tokens, and you can add the the request path to revocation_requests
+    jwt.revocation_requests = [['DELETE', %r{^users/sign_out$}]]
+    jwt.expiration_time = 1.day.to_i
+  end
+  config.remember_for = 1.day.to_i
+  config.timeout_in = 1.day.to_i
+  config.navigational_formats = []
 end

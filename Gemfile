@@ -34,6 +34,12 @@ group :development, :test do
   gem 'rubocop', '1.2.0', require: false
   gem 'rubocop-performance', '1.8.1', require: false
   gem 'rubocop-rails', require: false
+
+  # Testing
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -52,3 +58,6 @@ gem 'devise-jwt'
 
 # Cors
 gem 'rack-cors'
+
+# JSON:API
+gem 'jsonapi-rails'

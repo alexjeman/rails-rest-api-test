@@ -39,3 +39,21 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# rubocop
+gem 'rubocop', '1.2.0', require: false
+gem 'rubocop-performance', '1.8.1', require: false
+gem 'rubocop-rails', require: false
+
+# Devise
+gem 'devise', '>= 4.7.1'
+gem 'devise-jwt'
+
+# Cors
+gem 'rack-cors'
+
+# Use postgresql as the database for Active Record
+gem 'pg', '>= 0.18', '< 2.0'
+
+# Dotenv
+gem 'dotenv', '~> 2.7.6'
